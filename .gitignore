@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Pytest / Test Artifacts
+.pytest_cache/
+reports/allure-results/*
+!reports/allure-results/.gitkeep
+reports/html/*
+!reports/html/.gitkeep
+reports/screenshots/*
+!reports/screenshots/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# Environment secrets
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

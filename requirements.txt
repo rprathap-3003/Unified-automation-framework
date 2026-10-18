@@ -1,0 +1,35 @@
+# ==============================================================================
+# Unified Multi-Platform Test Automation Framework - Dependencies
+# Web (Selenium), Mobile (Appium), API (Requests), Desktop (PyWinAuto)
+# ==============================================================================
+
+# Core Test Runner & Plugins
+pytest>=8.0.0
+pytest-xdist>=3.5.0              # Parallel test execution
+pytest-html>=4.1.1               # Standalone HTML reporting
+pytest-rerunfailures>=14.0       # Automatic retry of flaky tests
+allure-pytest>=2.13.5            # Enterprise Allure test reporting
+
+# Web Automation (Selenium)
+selenium>=4.19.0
+webdriver-manager>=4.0.1         # Automatic browser driver management
+
+# Mobile Automation (Appium)
+Appium-Python-Client>=4.0.0      # Appium 2.x standard client for Android/iOS
+
+# API Automation & Validation
+requests>=2.31.0
+urllib3>=2.2.1
+pydantic>=2.7.0                  # Data modeling and serialization
+jsonschema>=4.21.1               # JSON Schema contract validation
+
+# Desktop Automation (Windows)
+pywinauto>=0.6.8                 # Native Windows UI Automation (UIA & Win32)
+
+# Utilities & Configuration
+PyYAML>=6.0.1                    # YAML configuration parsing
+python-dotenv>=1.0.1             # .env environment variables support
+loguru>=0.7.2                    # Modern structured logging
+Faker>=24.8.0                    # Synthetic test data generation
+pydantic-settings>=2.2.1         # Environment settings parsing
+colorama>=0.4.6                  # Colored CLI output for Windows

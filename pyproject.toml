@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unified-automation-framework"
+version = "1.0.0"
+description = "Enterprise unified multi-platform test automation framework for Web, Mobile, API, and Desktop in Python."
+authors = [{ name = "QA Automation Engineering Team" }]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pytest>=8.0.0",
+    "selenium>=4.19.0",
+    "Appium-Python-Client>=4.0.0",
+    "requests>=2.31.0",
+    "pywinauto>=0.6.8",
+    "PyYAML>=6.0.1",
+    "loguru>=0.7.2",
+    "pydantic>=2.7.0",
+    "jsonschema>=4.21.1",
+    "allure-pytest>=2.13.5",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--alluredir=reports/allure-results",
+    "--html=reports/html/report.html",
+    "--self-contained-html",
+]
+markers = [
+    "web: Web UI automation tests (Selenium)",
+    "mobile: Mobile automation tests (Appium for Android & iOS)",
+    "api: API REST / GraphQL automation tests (Requests)",
+    "desktop: Desktop Windows automation tests (PyWinAuto)",
+    "e2e: End-to-end multi-platform integration tests",
+    "smoke: Quick smoke sanity verification tests",
+    "regression: Full regression test suite",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"

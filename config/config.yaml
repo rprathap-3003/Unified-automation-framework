@@ -1,0 +1,69 @@
+# ==============================================================================
+# Unified Multi-Platform Automation Framework - Master Configuration
+# ==============================================================================
+
+environment:
+  default_env: dev
+  log_level: INFO
+
+web:
+  browser: chrome              # chrome | firefox | edge | safari
+  headless: false
+  implicit_wait: 0             # Keep 0 when using explicit waits (best practice)
+  explicit_wait: 15            # Seconds
+  page_load_timeout: 30
+  window_width: 1920
+  window_height: 1080
+  base_url: "https://www.saucedemo.com"
+  download_dir: "reports/downloads"
+  remote_url: null             # e.g., "http://localhost:4444/wd/hub" for Selenium Grid
+
+mobile:
+  server_url: "http://127.0.0.1:4723"
+  platform: android            # android | ios
+  explicit_wait: 20
+  new_command_timeout: 300
+
+  android:
+    automation_name: "UiAutomator2"
+    platform_name: "Android"
+    platform_version: "14.0"
+    device_name: "Pixel_7_API_34"
+    app: "test_data/apps/sauce-demo-android.apk"
+    app_package: "com.swaglabsmobileapp"
+    app_activity: "com.swaglabsmobileapp.MainActivity"
+    no_reset: false
+    full_reset: false
+    auto_grant_permissions: true
+
+  ios:
+    automation_name: "XCUITest"
+    platform_name: "iOS"
+    platform_version: "17.0"
+    device_name: "iPhone 15 Pro"
+    app: "test_data/apps/sauce-demo-ios.app"
+    bundle_id: "com.saucelabs.SwagLabsMobileApp"
+    no_reset: false
+
+api:
+  base_url: "https://petstore.swagger.io/v2"
+  timeout: 15                  # Seconds
+  max_retries: 3
+  backoff_factor: 0.5
+  verify_ssl: true
+  default_headers:
+    Content-Type: "application/json"
+    Accept: "application/json"
+
+desktop:
+  backend: "uia"               # "uia" (Modern Windows UI Automation) or "win32" (Legacy)
+  app_type: "native"           # native (pywinauto) or winappdriver
+  winappdriver_url: "http://127.0.0.1:4723"
+  timeout: 15
+  sample_app_path: "C:\\Windows\\System32\\notepad.exe"
+
+reporting:
+  screenshot_on_failure: true
+  screenshot_dir: "reports/screenshots"
+  allure_dir: "reports/allure-results"
+  html_report_path: "reports/html/report.html"

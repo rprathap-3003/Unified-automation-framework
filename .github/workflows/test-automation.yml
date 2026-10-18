@@ -1,0 +1,64 @@
+name: Multi-Platform Test Automation Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Test Platform to run'
+        required: true
+        default: 'api'
+        type: choice
+        options:
+          - api
+          - web
+          - smoke
+          - all
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run API Tests
+        if: ${{ github.event.inputs.platform == 'api' || github.event.inputs.platform == 'all' || github.event_name == 'push' }}
+        run: |
+          pytest -m api --alluredir=reports/allure-results
+
+      - name: Run Web Tests (Headless Chrome)
+        if: ${{ github.event.inputs.platform == 'web' || github.event.inputs.platform == 'smoke' || github.event.inputs.platform == 'all' }}
+        run: |
+          pytest -m web --headless=true --alluredir=reports/allure-results
+
+      - name: Run Desktop Tests (Windows)
+        if: ${{ github.event.inputs.platform == 'all' }}
+        run: |
+          pytest -m desktop --alluredir=reports/allure-results
+
+      - name: Upload Test Report Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: |
+            reports/html/
+            reports/allure-results/
+            reports/screenshots/
+            logs/

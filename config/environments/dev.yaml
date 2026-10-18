@@ -1,0 +1,10 @@
+# Dev Environment Configuration Overrides
+web:
+  base_url: "https://www.saucedemo.com"
+
+api:
+  base_url: "https://petstore.swagger.io/v2"
+
+mobile:
+  android:
+    app_package: "com.swaglabsmobileapp.dev"
